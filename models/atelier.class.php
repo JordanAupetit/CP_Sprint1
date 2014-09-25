@@ -9,14 +9,9 @@ class Atelier
 {
 
 	public function add($title, $dateAtelier, $description) {
-
 		if($title == "") {
 			return;
 		}
-
-		$title = addslashes($title); /* sécurisation */
-		$dateAtelier = addslashes($dateAtelier);
-		$description = addslashes($description);
 
 		$sql = 'INSERT INTO Atelier(nomAtelier, dateAtelier, description, inscription, labo_idlabo) 
 				VALUES(:nomAtelier, :dateAtelier, :description, :inscription, :labo_idlabo)';
@@ -38,8 +33,6 @@ class Atelier
 			return;
 		}
 
-		$title = addslashes($title); /* sécurisation */
-
 		$sql = 'UPDATE Atelier SET nomAtelier=? WHERE idAtelier=?';
 		$req = DataBaseConnection::prepare($sql);
 
@@ -52,8 +45,6 @@ class Atelier
 	}
 
 	public function update_description($id, $description) {
-		$description = addslashes($description); /* sécurisation */
-
 		$sql = 'UPDATE Atelier SET description=? WHERE idAtelier=?';
 		$req = DataBaseConnection::prepare($sql);
 		
