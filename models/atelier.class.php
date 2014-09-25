@@ -27,7 +27,7 @@ class Atelier
 		    'dateAtelier' => $dateAtelier,
 		    'description' => $description,
 		    'inscription' => true,
-		    'labo_idlabo' => 1
+		    'labo_idlabo' => 1 // Temporaire
 		));
 
 		$req->closeCursor();
