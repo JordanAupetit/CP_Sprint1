@@ -62,7 +62,15 @@ class Atelier
 		$result = array();
 
 		while($rep = $req->fetch()){
-			$result[] = $rep;
+			$obj = (object) [	
+				'idLabo' => $rep[0],
+				'courrielLabo' => $rep[1],
+				'nomLabo' => $rep[2],
+				'pwd' => $rep[3],
+				'sel' => $rep[4]
+			];
+
+			$result[] = $obj;
 		}
 
 		return $result; // Peut être vide
