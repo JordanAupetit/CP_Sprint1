@@ -40,21 +40,51 @@ class Querys {
     private function __construct() {
         
     }
-
+	
+	
+	/**
+     * Dit si une requette existe
+     * @access public
+     * @static
+     * 
+     * @param string $nameQuery
+     * @return boolean
+     */
+    public static function querysExists($nameQuery) {
+        return array_key_exists($nameQuery, Querys::$tabPDOStatement);
+        
+    }
     /**
      * Vérifie que la requette est déjà préparé
-     * @access private
+     * @access public
      * @static
      * 
      * @param string $nameQuery
      * @param string $sql
      * @return void
      */
-    private static function setQuerys($nameQuery, $sql) {
-        if (!array_key_exists($nameQuery, Querys::$tabPDOStatement)) {
+    public static function setQuerys($nameQuery, $sql) {
+        if (!Querys::querysExists($nameQuery)) {
             Querys::$tabPDOStatement[$nameQuery] = DataBaseConnection::prepare($sql);
         }
     }
+    
+    /**
+     * Retourne le statement d'une requette
+     * @access public
+     * @static
+     * 
+     * @todo a teste
+     *
+     * @param string $nameQuery
+     * @return Statement
+     */
+    public static function getStatement($nameQuery) {
+        if (Querys::querysExists($nameQuery)){
+            return Querys::$tabPDOStatement[$nameQuery];
+        }
+    }
+    
 
     /**
      * Ajoute un labo à la base de données
