@@ -1,6 +1,9 @@
 <?php 
 require_once("../config/config.php");
-require_once __DIR__ . '/../spring_autoload.php';
+require_once("../models/atelier.class.php");
+require_once("../models/AtelierConstruct.class.php");
+require_once("../models/AtelierAffichage.class.php");
+require_once("../models/AtelierForm.class.php");
 
 use models\atelier;
 
@@ -17,19 +20,70 @@ switch($action) {
   
  /* afficher un atelier */
  case "afficher" : 
-  
+  $titre = "Atelier";
+   
+   if (isset($_GET['id'])) {
+     $id = $_GET['id'];
+     
+     //$at = Atelier::lire($id); //a implementer
+       $form = new AtelierForm($at);
+     $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=retour", "retour");
+   } else {
+      $c = "Il manque un id";
+   }
     break;
+case "retour" : 
+	 goto defaultlabel;
+   break;
   /* ajouter un nouvel atelier */
  case "ajouter" : 
-  
+	 $titre = "Ajouter un nouvel atelier";   
+
+    $at = AtelierConstruct::initialize();
+	$form = new AtelierForm($at);
+    $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrernouveau", "ajouter");
+    
     break;
 
  /* modifier un un atelier */
  case "modifier" : 
     $titre = "Modifier un atelier";
-  
+   
+   if (isset($_GET['id'])) {
+     $id = $_GET['id'];
+     
+     //$at = Atelier::lire($id); //a implementer
+       $form = new AtelierForm($at);
+     $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrermodif", "modifier");
+   } else {
+      $c = "Il manque un id";
+   }
    
   break; 
+  
+  case 'enregistrernouveau':
+    
+   $atelier = AtelierConstruct::initialize($data);
+
+   $form = new AtelierForm($atelier);
+   Atelier::add($atelier);
+   $titre = "Atelier enregistr&eacute;";
+   $ui = new AtelierAffichage($atelier);
+   $c = $ui->makeHtml();
+   
+   break;
+
+case "enregistrermodif":
+   $titre = "Atelier enregistr&eacute;";
+   //$atelier = Atelier::lire($data['id']);
+   $atelier->update($data);
+   $form = new AtelierForm($atelier);
+
+     Atelier::update_title($atelier);
+	 Atelier::update_description($atelier);
+     $ui = new AtelierAffichage($atelier);
+     $c = $ui->makeHtml();
+   break; 
 
  /* supprimer un atelier */
  case "supprimer":
@@ -43,16 +97,12 @@ switch($action) {
    break;
 
  default:
+	defaultlabel:
    $titre = "Ateliers";
-   
-   
-
-   foreach (Atelier::get_all_ateliers() as $line) {//mettre les méthodes en statique?
-    
-       $c .= $line;
-    }
-   
-
+   $at = AtelierConstruct::initialize("");
+   $ui = new AtelierAffichage($at);
+   $c.="<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
+   $c .= $ui->makeHtml();
 
 }
 

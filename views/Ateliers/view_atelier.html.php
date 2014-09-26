@@ -17,7 +17,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 
 <div id="content">
 <h1><?php echo $titre; ?></h1>
-<h1><?php echo $c; ?></h1>
+<br/>
+
+<?php echo $c; ?>
 <!-- clearer -->
 <div class="clearer">&nbsp;</div>
 </div>
