@@ -8,13 +8,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema spring1
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `spring1` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
-USE `spring1` ;
+/*CREATE SCHEMA IF NOT EXISTS `spring1` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
+USE `spring1` ;*/
 
 -- -----------------------------------------------------
--- Table `spring1`.`labo`
+-- Table `labo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `spring1`.`labo` (
+CREATE TABLE IF NOT EXISTS `labo` (
   `idlabo` INT NOT NULL,
   `courrielLabo` VARCHAR(60) NOT NULL,
   `nomLabo` VARCHAR(45) NOT NULL,
@@ -25,9 +25,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `spring1`.`atelier`
+-- Table `atelier`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `spring1`.`atelier` (
+CREATE TABLE IF NOT EXISTS `atelier` (
   `idatelier` INT NOT NULL,
   `nomAtelier` VARCHAR(45) NOT NULL,
   `dateAtelier` TIMESTAMP NOT NULL,
