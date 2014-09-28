@@ -68,7 +68,8 @@ case "retour" :
    Atelier::add($atelier);
    $titre = "Atelier enregistr&eacute;";
    $ui = new AtelierAffichage($atelier);
-   $c = $ui->makeHtml();
+   $c = "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
+   $c .= $ui->makeHtml();
    
    break;
 
@@ -81,7 +82,8 @@ case "enregistrermodif":
      Atelier::update_title($atelier);
 	 Atelier::update_description($atelier);
      $ui = new AtelierAffichage($atelier);
-     $c = $ui->makeHtml();
+     $c = "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
+     $c .= $ui->makeHtml();
    break; 
 
  /* supprimer un atelier */
@@ -100,7 +102,7 @@ case "enregistrermodif":
    $titre = "Ateliers";
    $at = AtelierConstruct::initialize("");
    $ui = new AtelierAffichage($at);
-   $c.="<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
+   $c .= "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
    $c .= $ui->makeHtml();
 
 }
