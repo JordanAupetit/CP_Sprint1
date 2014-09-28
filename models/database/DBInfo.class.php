@@ -12,11 +12,11 @@ namespace models\database;
  */
 class DBInfo {
 
-    const dbhost = 'dbhost';
-    const dbport = 'dbport';
-    const dbname = 'dbname';
-    const dbuser = 'dbuser';
-    const dbpassword = 'dbpassword';
+    const dbhost = 'mysql';
+    const dbport = 'dbserver';
+    const dbname = 'jaupetit';
+    const dbuser = 'jaupetit';
+    const dbpassword = 'jaupetit';
 
     /**
      * Constructeur de la class

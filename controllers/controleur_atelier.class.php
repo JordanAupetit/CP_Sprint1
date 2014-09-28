@@ -5,8 +5,6 @@ require_once("../models/AtelierConstruct.class.php");
 require_once("../models/AtelierAffichage.class.php");
 require_once("../models/AtelierForm.class.php");
 
-use models\atelier;
-
 $data = is_array($_POST) ? $_POST : array();
 
 $action = isset($_GET['a']) ? $_GET['a'] : "";

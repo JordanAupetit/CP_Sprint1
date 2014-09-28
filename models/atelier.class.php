@@ -1,31 +1,45 @@
 <?php
+error_reporting(E_ALL); 
+ini_set("display_errors", 1); 
 
-require_once __DIR__ . '/../spring_autoload.php';
+require_once __DIR__ . '/../sprint_autoload.php';
 
 use \PDO;
 use models\database\DataBaseConnection;
 
 class Atelier
 {
-    
-	public static function add($title, $dateAtelier, $description) {
+	public static function add($atelier) {
+		$title = $atelier->getNomAtelier();
+		$dateAtelier = $atelier->getDateAtelier();
+		$description = $atelier->getDescription();
+
+
 		if($title == "") {
-			return;
+			//return;
 		}
 
 		$sql = 'INSERT INTO Atelier(nomAtelier, dateAtelier, description, inscription, labo_idlabo) 
 				VALUES(:nomAtelier, :dateAtelier, :description, :inscription, :labo_idlabo)';
-		$req = DataBaseConnection::prepare($sql);
-		
-		$req->execute(array(
-		    'nomAtelier' => $title,
-		    'dateAtelier' => $dateAtelier,
-		    'description' => $description,
-		    'inscription' => true,
-		    'labo_idlabo' => 1 // Temporaire
-		));
 
-		$req->closeCursor();
+		try {
+
+			$req = DataBaseConnection::prepare($sql);
+			
+			$req->execute(array(
+			    'nomAtelier' => $title,
+			    'dateAtelier' => $dateAtelier,
+			    'description' => $description,
+			    'inscription' => true,
+			    'labo_idlabo' => 1 // Temporaire
+			));
+
+			$req->closeCursor();
+		}
+		catch(Exception $e)
+		{
+			die('Erreur :' .$e->getMessage());
+		}
 	}
 
 	public static function update_title($id, $title) {

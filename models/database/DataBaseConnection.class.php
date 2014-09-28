@@ -5,7 +5,7 @@ namespace models\database;
 require_once __DIR__ . '/../../sprint_autoload.php';
 
 use \PDO;
-use webConnect\database\DBInfo;
+//use webConnect\database\DBInfo;
 
 /**
  * Class simple pour préparer ou exécuter une requette sql. 
@@ -31,7 +31,7 @@ class DataBaseConnection {
      * @access private
      */
     private function __construct() {
-        
+
     }
 
     /**
