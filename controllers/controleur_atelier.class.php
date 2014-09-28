@@ -35,11 +35,10 @@ switch($action) {
    
    if (isset($_GET['id'])) {
      $id = $_GET['id'];
-     
      $at = Atelier::get_atelier($id);
      $atelier = AtelierConstruct::initialize($at);
      $details = new AtelierDetails($atelier);
-     $c = $details->makeDetail();
+     $c = $details->makeDetail(PUBLIC_URL."controleur_atelier.class.php", "retour");
    } else {
       $c = "Il manque un id";
    }
@@ -52,7 +51,7 @@ case "retour" :
 	 $titre = "Ajouter un nouvel atelier";   
 
     $atelier = AtelierConstruct::initialize();
-	$form = new AtelierForm($atelier);
+	  $form = new AtelierForm($atelier);
     $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrernouveau", "ajouter");
     
     break;
@@ -62,10 +61,20 @@ case "retour" :
     $titre = "Modifier un atelier";
    
   if (isset($_GET['id'])) {
+    /*$form = new AtelierForm($atelier);
+    $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrermodif", "modifier");*/
+
     $id = $_GET['id'];
-    $atelier = Atelier::get_atelier($id); //a implementer
+    $at = Atelier::get_atelier($id);
+    $atelier = AtelierConstruct::initialize($at);
     $form = new AtelierForm($atelier);
     $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrermodif", "modifier");
+
+    /*$titre = "Ajouter un nouvel atelier";   
+
+    $atelier = AtelierConstruct::initialize();
+    $form = new AtelierForm($atelier);
+    $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrernouveau", "ajouter");*/
 
    } else {
       $c = "Il manque un id";
@@ -76,7 +85,6 @@ case "retour" :
   case 'enregistrernouveau':
     
    $atelier = AtelierConstruct::initialize($data);
-
    $form = new AtelierForm($atelier);
    Atelier::add($atelier);
    $titre = "Atelier enregistr&eacute;";
@@ -85,13 +93,19 @@ case "retour" :
    break;
 
 case "enregistrermodif":
-  $titre = "Atelier enregistr&eacute;";
+  $titre = "Atelier modifi&eacute;";
   //$atelier = Atelier::lire($data['id']);
-  $atelier->update($data);
-  $form = new AtelierForm($atelier);
+  //$atelier->update($data);
+  //$form = new AtelierForm($atelier);
 
-  Atelier::update_title($atelier);
-	Atelier::update_description($atelier);
+  //$id = $_GET['id'];
+  $id = $data['id'];
+  $at = Atelier::get_atelier($id);
+  $atelier = AtelierConstruct::initialize($at);
+  $atelier->update($data);
+
+  Atelier::update_title($id, $atelier->getNomAtelier());
+	Atelier::update_description($id, $atelier->getDescription());
   affichageAtelier($atelier, $c);
   break; 
 

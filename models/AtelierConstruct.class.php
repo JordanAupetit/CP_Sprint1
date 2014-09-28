@@ -49,9 +49,9 @@
     }
 
     /* dateAtelier présent dans $data ? */
-    if (isset($data['dateAtelier'])) {
+    /*if (isset($data['dateAtelier'])) {
       $this->dateAtelier($data['dateAtelier']);
-    } 
+    } */
 
        if (isset($data['description'])) {
       $this->setDescription($data['description']);

@@ -13,7 +13,7 @@ public function __construct($atelier) {
     $id = $this->atelier->getId(); 
 
     $text = <<<EOT
-	<form  >
+	<form>
 
 	<div><span>Nom de l'atelier :</span>
      	<span><input type="text" name="nomAtelier" value="{$nomAtelier}" disabled="disabled"  /></span>
@@ -27,10 +27,8 @@ public function __construct($atelier) {
      		<span><textarea name="description" cols="30" rows="3" disabled="disabled" >
              		{$description}</textarea></span>
 	</div>
-	<div class="submit">
-     		<input type="hidden" name="id" value="{$id}" />
-     		<input type="submit" name="go" value="{$invite}" />
-	</div>
+     
+    <a href="{$actionUrl}"> <button type="text">{$invite}</button> </a>
 	</form>
 EOT;
 
