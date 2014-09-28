@@ -1,13 +1,13 @@
 <?php
 	class AtelierConstruct{
-		protected $idatelier;
+		protected $idAtelier;
 	        protected $nomAtelier;
 	        protected $dateAtelier;
 	        protected $description;
 	        
 	       
 		protected function __construct($map=array()){
-			$this->idatelier = $map['idatelier'];
+			$this->idAtelier = $map['idAtelier'];
 			$this->nomAtelier = $map['nomAtelier'];
 			$this->dateAtelier = $map['dateAtelier'];
 			$this->description = $map['description'];
@@ -17,10 +17,10 @@
 		
 		static public function initialize($data=array()) {
 		      $map = array();
-		      if (isset($data['idatelier'])) {
-		    $map['idatelier'] = $data['idatelier'];
+		      if (isset($data['idAtelier'])) {
+		    $map['idAtelier'] = $data['idAtelier'];
 		      } else {
-		    $map['idatelier'] = '';
+		    $map['idAtelier'] = '';
 		      }
 		      if (isset($data['nomAtelier'])) {
 		    $map['nomAtelier'] = $data['nomAtelier'];
@@ -57,7 +57,7 @@
       $this->setDescription($data['description']);
     } 
   } 
-		 public function getId() { return $this->idatelier; }
+		 public function getId() { return $this->idAtelier; }
 
 
 		 
@@ -74,8 +74,8 @@
 
 		
 
-		public function setId($idatelier) { 
-		    $this->idatelier = $idatelier; 
+		public function setId($idAtelier) { 
+		    $this->idAtelier = $idAtelier; 
 		  }
 
 		  public function setNomAtelier($nomAtelier) { 
