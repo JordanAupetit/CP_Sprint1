@@ -14,7 +14,7 @@ define("BASE_FILE", 'C:\wamp\www\CP_Sprint1\\');
 
 define("PUBLIC_URL", BASE_URL . "controllers/");
 
-define('LIB_FILE', BASE_FILE . 'modeles/');
+define('LIB_FILE', BASE_FILE . 'models/');
 
 
 
