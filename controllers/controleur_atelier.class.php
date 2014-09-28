@@ -4,6 +4,7 @@ require_once("../models/atelier.class.php");
 require_once("../models/AtelierConstruct.class.php");
 require_once("../models/AtelierAffichage.class.php");
 require_once("../models/AtelierForm.class.php");
+require_once("../models/AtelierDetails.class.php");
 
 $data = is_array($_POST) ? $_POST : array();
 
@@ -35,9 +36,10 @@ switch($action) {
    if (isset($_GET['id'])) {
      $id = $_GET['id'];
      
-     //$at = Atelier::lire($id); //a implementer
-       $form = new AtelierForm($at);
-     $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=retour", "retour");
+     $at = Atelier::get_atelier($id);
+     $atelier = AtelierConstruct::initialize($at);
+     $details = new AtelierDetails($atelier);
+     $c = $details->makeDetail();
    } else {
       $c = "Il manque un id";
    }
@@ -49,8 +51,8 @@ case "retour" :
  case "ajouter" : 
 	 $titre = "Ajouter un nouvel atelier";   
 
-    $at = AtelierConstruct::initialize();
-	$form = new AtelierForm($at);
+    $atelier = AtelierConstruct::initialize();
+	$form = new AtelierForm($atelier);
     $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrernouveau", "ajouter");
     
     break;
@@ -59,12 +61,12 @@ case "retour" :
  case "modifier" : 
     $titre = "Modifier un atelier";
    
-   if (isset($_GET['id'])) {
-     $id = $_GET['id'];
-     
-     //$at = Atelier::lire($id); //a implementer
-       $form = new AtelierForm($at);
-     $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrermodif", "modifier");
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $atelier = Atelier::get_atelier($id); //a implementer
+    $form = new AtelierForm($atelier);
+    $c = $form->makeForm(PUBLIC_URL."controleur_atelier.class.php?a=enregistrermodif", "modifier");
+
    } else {
       $c = "Il manque un id";
    }
@@ -78,9 +80,6 @@ case "retour" :
    $form = new AtelierForm($atelier);
    Atelier::add($atelier);
    $titre = "Atelier enregistr&eacute;";
-   /*$ui = new AtelierAffichage($atelier);
-   $c = "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
-   $c .= $ui->makeHtml();*/
    affichageAtelier($atelier, $c);
    
    break;
@@ -93,9 +92,6 @@ case "enregistrermodif":
 
   Atelier::update_title($atelier);
 	Atelier::update_description($atelier);
-  /*$ui = new AtelierAffichage($atelier);
-  $c = "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
-  $c .= $ui->makeHtml();*/
   affichageAtelier($atelier, $c);
   break; 
 
@@ -104,10 +100,12 @@ case "enregistrermodif":
    $titre = "Atelier supprim&eacute;";
 
   if (isset($_GET['id'])) {
-    $c=Atelier::remove($_GET['id']); //mettre les méthodes en statique?
+    $c=Atelier::remove($_GET['id']);
   } else {
     $titre = "Pas d'identifiant - suppression impossible";
   }
+  $atelier = AtelierConstruct::initialize("");
+  affichageAtelier($atelier, $c);
    break;
 
  default:

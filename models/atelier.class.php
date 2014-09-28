@@ -70,20 +70,41 @@ class Atelier
 		$req->closeCursor(); /* Termine le traitement de la requête */
 	}
 
+	public static function get_atelier($id) {
+		$sql = 'SELECT * FROM atelier WHERE idAtelier='.$id;
+		$req = DataBaseConnection::query($sql);
+		//$result = array();
+		
+		$rep = $req->fetch();
+		$tmp = array();
+		$tmp['idAtelier'] = $rep[0];
+		$tmp['nomAtelier'] = $rep[1];
+		$tmp['dateAtelier'] = $rep[2];
+		$tmp['description'] = $rep[3];
+		$tmp['inscription'] = $rep[4];
+		$tmp['labo_idlabo'] = $rep[5];
+
+		/*while($rep = $req->fetch()){
+			$tmp = array();
+			$tmp['idAtelier'] = $rep[0];
+			$tmp['nomAtelier'] = $rep[1];
+			$tmp['dateAtelier'] = $rep[2];
+			$tmp['description'] = $rep[3];
+			$tmp['inscription'] = $rep[4];
+			$tmp['labo_idlabo'] = $rep[5];
+
+			$result[] = $tmp;
+		}*/
+
+		return $tmp; // Peut être vide
+	}
+
 	public static function get_all_ateliers() {
 		$sql = 'SELECT * FROM atelier';
 		$req = DataBaseConnection::query($sql);
 		$result = array();
 
 		while($rep = $req->fetch()){
-			/*$obj = (object) [	
-				'idLabo' => $rep[0],
-				'courrielLabo' => $rep[1],
-				'nomLabo' => $rep[2],
-				'pwd' => $rep[3],
-				'sel' => $rep[4]
-			];*/
-
 			$tmp = array();
 			$tmp['idAtelier'] = $rep[0];
 			$tmp['nomAtelier'] = $rep[1];
@@ -101,7 +122,7 @@ class Atelier
 
 	public static function remove($id) {
 		$sql = 'DELETE FROM atelier WHERE idAtelier=?';
-		$req = DataBaseConnection::query($sql);
+		$req = DataBaseConnection::prepare($sql);
 		
 		$req->execute(array(
 			$id

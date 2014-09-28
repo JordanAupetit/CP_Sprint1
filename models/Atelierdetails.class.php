@@ -12,7 +12,6 @@ public function __construct($atelier) {
     $description = $this->atelier->getDescription();
     $id = $this->atelier->getId(); 
 
-       
     $text = <<<EOT
 	<form  >
 
@@ -34,6 +33,7 @@ public function __construct($atelier) {
 	</div>
 	</form>
 EOT;
+
 return $text;
  }
  }
