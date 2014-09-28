@@ -19,7 +19,7 @@ class Atelier
 			//return;
 		}
 
-		$sql = 'INSERT INTO Atelier(nomAtelier, dateAtelier, description, inscription, labo_idlabo) 
+		$sql = 'INSERT INTO atelier(nomAtelier, dateAtelier, description, inscription, labo_idlabo) 
 				VALUES(:nomAtelier, :dateAtelier, :description, :inscription, :labo_idlabo)';
 
 		try {
@@ -47,7 +47,7 @@ class Atelier
 			return;
 		}
 
-		$sql = 'UPDATE Atelier SET nomAtelier=? WHERE idAtelier=?';
+		$sql = 'UPDATE atelier SET nomAtelier=? WHERE idAtelier=?';
 		$req = DataBaseConnection::prepare($sql);
 
 		$req->execute(array(
@@ -59,7 +59,7 @@ class Atelier
 	}
 
 	public static function update_description($id, $description) {
-		$sql = 'UPDATE Atelier SET description=? WHERE idAtelier=?';
+		$sql = 'UPDATE atelier SET description=? WHERE idAtelier=?';
 		$req = DataBaseConnection::prepare($sql);
 		
 		$req->execute(array(
@@ -71,7 +71,7 @@ class Atelier
 	}
 
 	public static function get_all_ateliers() {
-		$sql = 'SELECT * FROM Atelier';
+		$sql = 'SELECT * FROM atelier';
 		$req = DataBaseConnection::prepare($sql);
 		$result = array();
 
@@ -91,7 +91,7 @@ class Atelier
 	}
 
 	public static function remove($id) {
-		$sql = 'DELETE FROM Atelier WHERE idAtelier=?';
+		$sql = 'DELETE FROM atelier WHERE idAtelier=?';
 		$req = DataBaseConnection::prepare($sql);
 		
 		$req->execute(array(

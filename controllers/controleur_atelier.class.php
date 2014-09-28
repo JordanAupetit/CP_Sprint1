@@ -12,7 +12,8 @@ $action = isset($_GET['a']) ? $_GET['a'] : "";
 $titre="";
 $c="";
 
-$squelette = BASE_FILE . "views\\Ateliers\\view_atelier.html.php";
+//$squelette = "..\\views\\Ateliers\\view_atelier.html.php";
+$squelette = "../views/Ateliers/view_atelier.html.php";
 
 switch($action) {
   

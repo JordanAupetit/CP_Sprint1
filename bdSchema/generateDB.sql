@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `atelier` (
   INDEX `fk_atelier_labo_idx` (`labo_idlabo` ASC),
   CONSTRAINT `fk_atelier_labo`
     FOREIGN KEY (`labo_idlabo`)
-    REFERENCES `spring1`.`labo` (`idlabo`)
+    REFERENCES `labo` (`idlabo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

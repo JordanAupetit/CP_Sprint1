@@ -12,8 +12,9 @@ namespace models\database;
  */
 class DBInfo {
 
-    const dbhost = 'mysql';
-    const dbport = 'dbserver';
+    const sgbd = 'mysql';
+    const dbhost = 'dbserver';
+    const dbport = '';
     const dbname = 'jaupetit';
     const dbuser = 'jaupetit';
     const dbpassword = 'jaupetit';

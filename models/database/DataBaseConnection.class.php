@@ -42,9 +42,11 @@ class DataBaseConnection {
      * @return void
      */
     private static function connection() {
-        $url = 'mysql:host=' . DBInfo::dbhost . ';port=' . DBInfo::dbport . ';dbname=' . DBInfo::dbname;
-        self::$pdo = new PDO($url, DBInfo::dbuser, DBInfo::dbpassword , array(
-           PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        /*$url = 'mysql:host=' . DBInfo::dbhost . ';port=' . DBInfo::dbport . ';dbname=' . DBInfo::dbname;
+        self::$pdo = new PDO($url, DBInfo::dbuser, DBInfo::dbpassword , array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));*/
+
+        $url = DBInfo::sgbd . ':host=' . DBInfo::dbhost . ';dbname=' . DBInfo::dbname;
+        self::$pdo = new PDO($url, DBInfo::dbuser, DBInfo::dbpassword, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
         
     }
 
