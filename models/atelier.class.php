@@ -1,14 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../sprint_autoload.php';
+require_once __DIR__ . '/../spring_autoload.php';
 
 use \PDO;
 use models\database\DataBaseConnection;
 
 class Atelier
 {
-
-	public function add($title, $dateAtelier, $description) {
+    
+	public static function add($title, $dateAtelier, $description) {
 		if($title == "") {
 			return;
 		}
@@ -28,7 +28,7 @@ class Atelier
 		$req->closeCursor();
 	}
 
-	public function update_title($id, $title) {
+	public static function update_title($id, $title) {
 		if($title == "") {
 			return;
 		}
@@ -44,7 +44,7 @@ class Atelier
 		$req->closeCursor(); /* Termine le traitement de la requête */
 	}
 
-	public function update_description($id, $description) {
+	public static function update_description($id, $description) {
 		$sql = 'UPDATE Atelier SET description=? WHERE idAtelier=?';
 		$req = DataBaseConnection::prepare($sql);
 		
@@ -56,7 +56,7 @@ class Atelier
 		$req->closeCursor(); /* Termine le traitement de la requête */
 	}
 
-	public function get_all_ateliers() {
+	public static function get_all_ateliers() {
 		$sql = 'SELECT * FROM Atelier';
 		$req = DataBaseConnection::prepare($sql);
 		$result = array();
@@ -76,7 +76,7 @@ class Atelier
 		return $result; // Peut être vide
 	}
 
-	public function remove($id) {
+	public static function remove($id) {
 		$sql = 'DELETE FROM Atelier WHERE idAtelier=?';
 		$req = DataBaseConnection::prepare($sql);
 		
