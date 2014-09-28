@@ -104,6 +104,15 @@ case "enregistrermodif":
    $ui = new AtelierAffichage($at);
    $c .= "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
    $c .= $ui->makeHtml();
+   
+   foreach (Atelier::get_all_ateliers() as $line) {
+   
+       $at = AtelierConstruct::initialize($line);
+    
+      $ui = new AtelierAffichage($at);
+   
+		$c .= $ui->makeHtml();
+    }
 
 }
 
