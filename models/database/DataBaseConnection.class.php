@@ -95,7 +95,7 @@ class DataBaseConnection {
      */
     public static function query($querys) {
         self::setConnection();
-        var_dump($querys);
+        //var_dump($querys);
         return self::$pdo->query($querys);
     }
 

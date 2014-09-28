@@ -72,19 +72,28 @@ class Atelier
 
 	public static function get_all_ateliers() {
 		$sql = 'SELECT * FROM atelier';
-		$req = DataBaseConnection::prepare($sql);
+		$req = DataBaseConnection::query($sql);
 		$result = array();
 
 		while($rep = $req->fetch()){
-			$obj = (object) [	
+			/*$obj = (object) [	
 				'idLabo' => $rep[0],
 				'courrielLabo' => $rep[1],
 				'nomLabo' => $rep[2],
 				'pwd' => $rep[3],
 				'sel' => $rep[4]
-			];
+			];*/
 
-			$result[] = $obj;
+			$tmp = array();
+			$tmp['idAtelier'] = $rep[0];
+			$tmp['nomAtelier'] = $rep[1];
+			$tmp['dateAtelier'] = $rep[2];
+			$tmp['description'] = $rep[3];
+			$tmp['inscription'] = $rep[4];
+			$tmp['labo_idlabo'] = $rep[5];
+
+			//$result[] = $obj;
+			$result[] = $tmp;
 		}
 
 		return $result; // Peut être vide
@@ -92,7 +101,7 @@ class Atelier
 
 	public static function remove($id) {
 		$sql = 'DELETE FROM atelier WHERE idAtelier=?';
-		$req = DataBaseConnection::prepare($sql);
+		$req = DataBaseConnection::query($sql);
 		
 		$req->execute(array(
 			$id

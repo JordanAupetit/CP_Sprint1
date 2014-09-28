@@ -15,6 +15,17 @@ $c="";
 //$squelette = "..\\views\\Ateliers\\view_atelier.html.php";
 $squelette = "../views/Ateliers/view_atelier.html.php";
 
+function affichageAtelier($atelier, &$c) {
+  $ui = new AtelierAffichage($atelier);
+  $c .= "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
+
+  foreach (Atelier::get_all_ateliers() as $line) {
+    $atelier = AtelierConstruct::initialize($line);
+    $ui = new AtelierAffichage($atelier);
+    $c .= $ui->makeHtml();
+  }
+}
+
 switch($action) {
   
  /* afficher un atelier */
@@ -67,52 +78,43 @@ case "retour" :
    $form = new AtelierForm($atelier);
    Atelier::add($atelier);
    $titre = "Atelier enregistr&eacute;";
-   $ui = new AtelierAffichage($atelier);
+   /*$ui = new AtelierAffichage($atelier);
    $c = "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
-   $c .= $ui->makeHtml();
+   $c .= $ui->makeHtml();*/
+   affichageAtelier($atelier, $c);
    
    break;
 
 case "enregistrermodif":
-   $titre = "Atelier enregistr&eacute;";
-   //$atelier = Atelier::lire($data['id']);
-   $atelier->update($data);
-   $form = new AtelierForm($atelier);
+  $titre = "Atelier enregistr&eacute;";
+  //$atelier = Atelier::lire($data['id']);
+  $atelier->update($data);
+  $form = new AtelierForm($atelier);
 
-     Atelier::update_title($atelier);
-	 Atelier::update_description($atelier);
-     $ui = new AtelierAffichage($atelier);
-     $c = "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
-     $c .= $ui->makeHtml();
-   break; 
+  Atelier::update_title($atelier);
+	Atelier::update_description($atelier);
+  /*$ui = new AtelierAffichage($atelier);
+  $c = "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
+  $c .= $ui->makeHtml();*/
+  affichageAtelier($atelier, $c);
+  break; 
 
  /* supprimer un atelier */
  case "supprimer":
    $titre = "Atelier supprim&eacute;";
 
-   if (isset($_GET['id'])) {
-     $c=Atelier::remove($_GET['id']); //mettre les méthodes en statique?
-   } else {
-     $titre = "Pas d'identifiant - suppression impossible";
-   }
+  if (isset($_GET['id'])) {
+    $c=Atelier::remove($_GET['id']); //mettre les méthodes en statique?
+  } else {
+    $titre = "Pas d'identifiant - suppression impossible";
+  }
    break;
 
  default:
 	defaultlabel:
    $titre = "Ateliers";
-   $at = AtelierConstruct::initialize("");
-   $ui = new AtelierAffichage($at);
-   $c .= "<a href=\"controleur_atelier.class.php?a=ajouter\">Ajouter un atelier</a>";
-   $c .= $ui->makeHtml();
-   
-   foreach (Atelier::get_all_ateliers() as $line) {
-   
-       $at = AtelierConstruct::initialize($line);
-    
-      $ui = new AtelierAffichage($at);
-   
-		$c .= $ui->makeHtml();
-    }
+   $atelier = AtelierConstruct::initialize("");
+   affichageAtelier($atelier, $c);
 
 }
 
