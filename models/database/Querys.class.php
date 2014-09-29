@@ -94,7 +94,7 @@ class Querys {
      * @param \modeles\labo\Labo $labo le nouveaux labo à ajouter
      * @return string numero du labo ou null
      */
-    public static function addShop(Labo $labo) {
+    public static function addLabo(Labo $labo) {
         $nameQuery = "addShop";
         $sql = "INSERT INTO labo (`courrielLabo`, `nameLabo`,`pwd`, `sel`) 
                 VALUES (:courrielLabo, :nameLabo, :pwd, :sel)";
@@ -122,7 +122,7 @@ class Querys {
      * @param int $idLabo
      * @return \modeles\labo\Labo null si le labo n'existe pas
      */
-    public static function getShop($idLabo) {
+    public static function getLabo($idLabo) {
         $nameQuery = "getLabo";
         $sql = "SELECT * FROM labo WHERE id_labo = :id_labo";
         Querys::setQuerys($nameQuery, $sql);
